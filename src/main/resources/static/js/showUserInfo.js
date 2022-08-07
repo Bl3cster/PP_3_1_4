@@ -1,5 +1,5 @@
 function showSideMenuForUserOnly() {
-    // Конструкция бокового меню для юзера
+    // Конструкция бокового меню юзера
     $("#sideMenu").children().remove();
     $(
         "<li class=\"nav-item\"><a class=\"nav-link active\"  onclick=\"showSideMenuForUserOnly()\">User info</a></li>"

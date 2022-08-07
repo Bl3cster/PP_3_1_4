@@ -1,5 +1,5 @@
 const deleteUserLink = "http://localhost:8080/api/users/delete/"
-// функция для удаления юзера
+// функция удаления юзера
 function deleteUser(id) {
     fetch(deleteUserLink+id, {
         method: "DELETE",

@@ -1,8 +1,10 @@
 package ru.kata.spring.boot_security.demo.service;
+//
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.reposirory.RoleRepository;
 
@@ -34,11 +36,13 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findAll(Sort.by(Sort.Direction.ASC, "role"));
     }
 
+    @Transactional
     @Override
     public void saveRole(Role role) {
         roleRepository.save(role);
     }
 
+    @Transactional
     @Override
     public void saveAll(Collection<Role> roles) {
         roleRepository.saveAll(roles);

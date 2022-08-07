@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
-//@Data
 @Table(name = "users")
 public class User implements UserDetails, Serializable {
     @Id

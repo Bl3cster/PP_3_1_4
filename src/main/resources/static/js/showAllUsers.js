@@ -6,7 +6,7 @@ function showAllUsers() {
         "<li class=\"nav-item\"><a class=\"nav-link\" onclick=\"showSideMenuForAdminAndUser()\">User info</a></li>"
     ).appendTo("#sideMenu");
 
-    // Конструкция заголовка окна
+    // Конструкция заголовка
     $("#pageSubHeader").children().remove();
     $(
         "<h1>Admin panel</h1>"

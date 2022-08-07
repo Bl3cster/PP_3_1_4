@@ -1,7 +1,7 @@
 const findMeUser = "http://localhost:8080/api/userinfo";
 let meUser;
 
-// Функция для обновления перменной
+// Функция обновления перменной
 function getMeUser() {
     meUser = fetch(findMeUser).then(response => response.json());
 }

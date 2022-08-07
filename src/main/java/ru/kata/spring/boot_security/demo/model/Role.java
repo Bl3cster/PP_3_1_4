@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-//@Data
 @Table(name = "roles")
 public class Role implements GrantedAuthority, Serializable {
 

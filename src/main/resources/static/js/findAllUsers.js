@@ -1,7 +1,7 @@
 const findUsersList = "http://localhost:8080/api/users";
 
 function showUsersTable() {
-    // конструирует таблицу со всеми юзерами и модальными окнами
+    // конструирует таблицу со всеми юзерами и модалками
     $("#usersInfoTable").children().remove();
     fetch(findUsersList).then(response => response.json()).then(users => users.map(user => {
         $(

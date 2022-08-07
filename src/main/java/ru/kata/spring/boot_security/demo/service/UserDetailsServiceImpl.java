@@ -11,7 +11,6 @@ import ru.kata.spring.boot_security.demo.reposirory.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
