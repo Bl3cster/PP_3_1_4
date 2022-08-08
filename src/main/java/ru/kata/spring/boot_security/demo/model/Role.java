@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,16 +38,6 @@ public class Role implements GrantedAuthority, Serializable {
         return getRole();
     }
 
-    public String getRoleAsString() {
-        String s = "";
-        if (role.contains("ROLE_ADMIN")) {
-            s = "Admin";
-        } else if (role.contains("ROLE_USER")) {
-            s = "User";
-        }
-        return s;
-    }
-
     public int getId() {
         return id;
     }
@@ -73,6 +64,16 @@ public class Role implements GrantedAuthority, Serializable {
         this.users = users;
     }
 
+    public String getRoleAsString() {
+        String s = "";
+        if (role.contains("ROLE_ADMIN")) {
+            s = "Admin";
+        } else if (role.contains("ROLE_USER")) {
+            s = "User";
+        }
+        return s;
+    }
+
     @Override
     public String toString() {
         return "Role{" +
@@ -80,5 +81,18 @@ public class Role implements GrantedAuthority, Serializable {
                 ", role='" + role + '\'' +
                 ", users=" + users +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role1 = (Role) o;
+        return id == role1.id && role.equals(role1.role) && Objects.equals(users, role1.users);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, role, users);
     }
 }

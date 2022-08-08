@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.init;
 
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -32,9 +33,9 @@ public class InitImpl implements Init {
         if (users.isEmpty()) {
             Role admin = new Role("ROLE_ADMIN");
             Role user = new Role("ROLE_USER");
-            Collection<Role> adminRole = new HashSet<>();
-            Collection<Role> userRole = new HashSet<>();
-            Collection<Role> anyRole = new HashSet<>();
+            Set<Role> adminRole = new HashSet<>();
+            Set<Role> userRole = new HashSet<>();
+            Set<Role> anyRole = new HashSet<>();
             adminRole.add(admin);
             userRole.add(user);
             anyRole.add(admin);
