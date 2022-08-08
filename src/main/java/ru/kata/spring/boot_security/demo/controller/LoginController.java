@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping
-public class IndexController {
+public class LoginController {
 
     @GetMapping(value ="/")
     public String openStartPage() {

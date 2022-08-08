@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.security;
+package ru.kata.spring.boot_security.demo.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,20 +13,20 @@ import java.util.HashSet;
 import java.util.List;
 
 @Component
-public class PostConstructInit {
+public class InitImpl implements Init {
 
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public PostConstructInit(UserService userService, RoleService roleService) {
+    public InitImpl(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
 //    Загружаю в базу дефолтный набор юзеров
     @PostConstruct
-    public void init() {
+    public void InitUserAndRole() {
         List<User> users = userService.findAllUsers();
 
         if (users.isEmpty()) {
