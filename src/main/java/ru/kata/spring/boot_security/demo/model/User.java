@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.mapping.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -33,13 +32,13 @@ public class User implements UserDetails, Serializable {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Collection<Role> roles;
 
 
     public User() {
     }
 
-    public User(String firstName, String lastName, int age, String email, String password, Set<Role> roles) {
+    public User(String firstName, String lastName, int age, String email, String password, Collection<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -59,18 +58,6 @@ public class User implements UserDetails, Serializable {
         return email;
     }
 
-    public String getRolesString() {
-        StringBuilder sb = new StringBuilder();
-        for (Role role : roles) {
-            if (role.getRole().contains("ROLE_ADMIN")) {
-                sb.append("Admin");
-            } else if (role.getRole().contains("ROLE_USER")) {
-                sb.append("User");
-            }
-            sb.append("; ");
-        }
-        return sb.toString().trim();
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -142,13 +129,25 @@ public class User implements UserDetails, Serializable {
     }
 
 
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+    public String getRolesString() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roles) {
+            if (role.getRole().contains("ROLE_ADMIN")) {
+                sb.append("Admin");
+            } else if (role.getRole().contains("ROLE_USER")) {
+                sb.append("User");
+            }
+            sb.append("; ");
+        }
+        return sb.toString().trim();
     }
     @Override
     public String toString() {
@@ -167,11 +166,11 @@ public class User implements UserDetails, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && age == user.age && firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && password.equals(user.password) && Objects.equals(roles, user.roles);
+        return id == user.id && age == user.age && firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age, email, password, roles);
+        return Objects.hash(id, firstName, lastName, age, email, password);
     }
 }
