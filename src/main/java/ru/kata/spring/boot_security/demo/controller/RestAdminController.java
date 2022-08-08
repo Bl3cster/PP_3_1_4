@@ -10,7 +10,7 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -26,12 +26,12 @@ public class RestAdminController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> showAllUsers() {
+    public ResponseEntity<Set<User>> showAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/roles")
-    public ResponseEntity<List<Role>> showAllRoles() {
+    public ResponseEntity<Set<Role>> showAllRoles() {
         return new ResponseEntity<>(roleService.findAllRoles(), HttpStatus.OK);
     }
 

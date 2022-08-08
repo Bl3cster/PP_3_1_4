@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,13 +33,13 @@ public class User implements UserDetails, Serializable {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
 
     public User() {
     }
 
-    public User(String firstName, String lastName, int age, String email, String password, Collection<Role> roles) {
+    public User(String firstName, String lastName, int age, String email, String password, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -134,7 +135,7 @@ public class User implements UserDetails, Serializable {
     }
 
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
     public String getRolesString() {

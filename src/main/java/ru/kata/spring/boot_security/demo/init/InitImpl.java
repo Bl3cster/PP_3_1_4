@@ -8,9 +8,8 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.annotation.PostConstruct;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class InitImpl implements Init {
@@ -27,14 +26,14 @@ public class InitImpl implements Init {
 //    Загружаю в базу дефолтный набор юзеров
     @PostConstruct
     public void InitUserAndRole() {
-        List<User> users = userService.findAllUsers();
+        Set<User> users = userService.findAllUsers();
 
         if (users.isEmpty()) {
             Role admin = new Role("ROLE_ADMIN");
             Role user = new Role("ROLE_USER");
-            Collection<Role> adminRole = new HashSet<>();
-            Collection<Role> userRole = new HashSet<>();
-            Collection<Role> anyRole = new HashSet<>();
+            Set<Role> adminRole = new HashSet<>();
+            Set<Role> userRole = new HashSet<>();
+            Set<Role> anyRole = new HashSet<>();
             adminRole.add(admin);
             userRole.add(user);
             anyRole.add(admin);

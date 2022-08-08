@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.reposirory.RoleRepository;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 
 @Service
@@ -32,8 +33,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> findAllRoles() {
-        return roleRepository.findAll(Sort.by(Sort.Direction.ASC, "role"));
+    public Set<Role> findAllRoles() {
+        return new HashSet<>(roleRepository.findAll(Sort.by(Sort.Direction.ASC, "role")));
     }
 
     @Transactional
@@ -44,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional
     @Override
-    public void saveAll(Collection<Role> roles) {
+    public void saveAll(Set<Role> roles) {
         roleRepository.saveAll(roles);
     }
 
