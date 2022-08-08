@@ -14,9 +14,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @EnableWebSecurity
 public class WebSecurityConfig {
     private final SuccessUserHandler successUserHandler;
-
     private final Encoder encoder;
-
     private final UserService userService;
 
     public WebSecurityConfig(SuccessUserHandler successUserHandler, Encoder encoder, UserService userService) {
@@ -33,7 +31,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/user").access("hasRole('ROLE_USER')")
+                .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().successHandler(successUserHandler)
@@ -43,7 +41,6 @@ public class WebSecurityConfig {
                 .permitAll();
         return http.build();
     }
-
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
