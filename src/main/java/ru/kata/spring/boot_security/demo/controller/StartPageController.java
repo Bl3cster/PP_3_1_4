@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping
-public class AdminController {
+public class StartPageController {
+
+    @GetMapping(value = "/user")
+    public String openStartPage() {
+        return "/user";
+    }
 
     @GetMapping(value = "/admin")
-    public String openStartPage() {
+    public String openStartAdminPage() {
         return "/admin";
     }
 }
