@@ -36,7 +36,7 @@ function showUsersTable() {
             "            <tbody>\n" +
             "            <tr>\n" +
             "                <td class=\"text-left fs-5\">\n" +
-            "                    <label for=\"firstName_edit" + user.id + "\">Name:</label>\n" +
+            "                    <label for=\"firstName_edit" + user.id + "\">First Name:</label>\n" +
             "                </td>\n" +
             "                <td class=\"text-center\">\n" +
             "                    <input class=\"form-control\" type=\"text\"\n" +
@@ -120,7 +120,7 @@ function showUsersTable() {
             "                                                            </tr>\n" +
             "                                                            <tr>\n" +
             "                                                                <td class=\"text-left fs-5\">\n" +
-            "                                                                    <label for=\"firstName\">Name:</label>\n" +
+            "                                                                    <label for=\"firstName\">First Name:</label>\n" +
             "                                                                </td>\n" +
             "                                                                <td class=\"text-center\">\n" +
             "                                                                    <input class=\"form-control\" type=\"text\" id=\"firstName\" value=\"" + user.firstName + "\" disabled>\n" +

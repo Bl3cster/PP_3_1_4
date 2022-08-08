@@ -10,7 +10,7 @@ function editUser(id) {
     // формируем тело запроса
     let newUserJSON = {
         id: id,
-        username: $("#firstName_edit" + id).val().trim(),
+        firstName: $("#firstName_edit" + id).val().trim(),
         lastName: $("#lastName_edit" + id).val().trim(),
         age: $("#age_edit" + id).val().trim(),
         email: $("#email_edit" + id).val().trim(),
