@@ -2,31 +2,36 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.reposirory.RoleRepository;
 import ru.kata.spring.boot_security.demo.reposirory.UserRepository;
+import ru.kata.spring.boot_security.demo.security.Encoder;
 
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final RoleRepository roleRepository;
+
     private final UserRepository userRepository;
-    private final PasswordEncoder bCryptPasswordEncoder;
+    private final Encoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(RoleRepository roleRepository, UserRepository userRepository, Encoder encoder) {
+        this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.encoder = encoder;
     }
 
     @Transactional
     @Override
     public void addUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userRepository.save(encoder.passwordCoder(user));
     }
 
     @Transactional
@@ -37,7 +42,7 @@ public class UserServiceImpl implements UserService {
                 user.getPassword().equals(findUserById(user.getId()).getPassword())) {
             user.setPassword(findUserById(user.getId()).getPassword());
         } else {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            encoder.passwordCoder(user);
         }
         userRepository.save(user);
     }
@@ -60,5 +65,12 @@ public class UserServiceImpl implements UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        user.setRoles(roleRepository.findAllByUsersId(user.getId()));
+        return user;
     }
 }
