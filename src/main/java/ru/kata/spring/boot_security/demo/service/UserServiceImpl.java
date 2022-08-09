@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public User findUserById(long id) {
         return userRepository.findById(id).get();
     }
-
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
